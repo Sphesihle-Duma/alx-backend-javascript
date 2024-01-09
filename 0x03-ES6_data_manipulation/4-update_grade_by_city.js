@@ -1,10 +1,22 @@
-export default function updatedStudentGradeByCity(arrayOfStudents, city, arrayOfGrades) {
-  if (Array.isArray(arrayOfStudents) && Array.isArray(arrayOfGrades)) {
-    return arrayOfStudents.filter((student) => student.location === city).map((obj) => {
-      const findIdStudent = arrayOfGrades.filter((stu) => stu.id === obj.id);
-      const { grade = 'N/A' } = findIdStudent.length > 0 ? findIdStudent[0] : {};
-      return { ...obj, grade };
+// Assume getListStudents is already defined and implemented
+
+function updateStudentGradeByCity(students, city, newGrades) {
+  return students
+    .filter((student) => student.location === city)
+    .map((student) => {
+      const matchingGrades = newGrades.filter((grade) => grade.studentId === student.id);
+
+      if (matchingGrades.length > 0) {
+        return {
+          ...student,
+          grade: matchingGrades[0].grade,
+        };
+      }
+      return {
+        ...student,
+        grade: 'N/A',
+      };
     });
-  }
-  return [];
 }
+
+export default updateStudentGradeByCity;
