@@ -1,16 +1,19 @@
-const calculateNumber = (type, a, b) =>{
-  if(typeof type === 'string'){
-    if(type === 'DIVIDE'){
-      if(Math.round(b) === 0)
-        return 'Error';
-      else
-        return Math.round(a)/ Math.round(b);
+function calculateNumber(type, a, b) {
+  const firstInt = Math.round(a);
+  const secondInt = Math.round(b);
+
+  if (type === 'SUBTRACT') {
+    return firstInt - secondInt;
+  }
+
+  if (type === 'DIVIDE') {
+    if (secondInt === 0) {
+      return 'Error';
+    }
+    return firstInt / secondInt;
+  }
+
+  return firstInt + secondInt;
 }
-    else if(type === 'SUM')
-      return Math.round(a) + Math.round(b);
-    else if(type === 'SUBTRACT')
-      return Math.round(a) - Math.round(b); 
-}
-  return 'Error';
-}
+
 module.exports = calculateNumber;
